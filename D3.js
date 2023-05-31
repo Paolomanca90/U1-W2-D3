@@ -128,8 +128,15 @@ console.log('characters:', characters)
 const femaleCharacters = []
 
 for(let i = 0; i < starWarsCharacters.length; i++){
-  if(starWarsCharacters[i].gender === 'female')
-  femaleCharacters.push(starWarsCharacters[i])
+  if(starWarsCharacters[i].gender === 'female'){
+    let copy = Object.assign({}, starWarsCharacters[i])
+    delete copy.birth_year
+    delete copy.height
+    delete copy.mass
+    delete copy.skin_color
+    delete copy.gender
+    femaleCharacters.push(copy)
+  }
 }
 
 console.log('femaleCharactes:', femaleCharacters)
@@ -270,18 +277,29 @@ console.log(starWarsCharacters)
   Una volta fatto crea un console.log per controllare la proprietà length di "characters" prima e dopo l'operazione.
 */
 
-console.log(characters)
+console.log('characters', characters)
 
 for(let i = 0; i < femaleCharacters.length; i++){
-  for(let y = 0; y < characters.lenght; y++){
-    if(femaleCharacters[i].name === characters[y].name){
-      characters[y].splice()
+  for(let y = 0; y < characters.length; y++){
+    if(femaleCharacters[i].name === characters[y]){
+      characters.splice(y,1)
     }
   }
 }
 
-console.log(characters)
+console.log('characters', characters)
 
 /* --EXTRA-- ESERCIZIO 10
   Crea una funzionalità che prenda un elemento casuale dall'array "starWarsCharacters" e ne stampi in console le proprietà in modo discorsivo (a tuo piacimento).
 */
+
+let numeroRandom = Math.floor(Math.random()*starWarsCharacters.length)
+
+console.log('Presentazione: ' + starWarsCharacters[numeroRandom].name + 
+            ', alto',starWarsCharacters[numeroRandom].height,'cm e con un peso di',
+            starWarsCharacters[numeroRandom].mass,'kg. Ha gli occhi color',
+            starWarsCharacters[numeroRandom].eye_color+', i capelli color',
+            starWarsCharacters[numeroRandom].hair_color,'e la pelle color',
+            starWarsCharacters[numeroRandom].skin_color+'. Genere',
+            starWarsCharacters[numeroRandom].gender,'nato il',
+            starWarsCharacters[numeroRandom].birth_year+'.')
